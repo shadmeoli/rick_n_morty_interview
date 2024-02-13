@@ -10,3 +10,4 @@
 
 > I have setup my app using the create-t3-app.
 
+I am going with the REST API.
