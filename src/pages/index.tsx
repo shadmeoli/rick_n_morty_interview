@@ -28,9 +28,11 @@ import { SkeletonLocation } from "@/components/ui/Skeleton";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { RocketIcon } from "@radix-ui/react-icons";
+import { useRouter } from "next/router";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { api } from "@/utils/api";
+import Search from "@/components/Search";
 
 enum FilterOption {
   location = "location",
@@ -39,13 +41,14 @@ enum FilterOption {
 }
 
 export default function Home() {
+  const router = useRouter()
   const LOCATIONS_URL = "https://rickandmortyapi.com/api/location";
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [value, setValue] = React.useState<string>("");
   const [locationList, setLocationList] = useState<Location[]>([]);
-  const [showAlert, setShowAlert] = useState<boolean>(false)
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const [filterOptions, setFilterOptions] = useState<FilterOption>(
     FilterOption.location,
   );
@@ -66,51 +69,13 @@ export default function Home() {
     getLocations();
   }, []);
 
-  function getSuggestions() {}
-
-  function onChange(event: ChangeEvent, { newValue }) {
-    setLocationList(newValue);
-  }
-
-  function onSuggestionsFetchRequested() {}
-  function onSuggestionsClearRequested() {}
-  function onSuggestionSelected() {}
-  const renderSuggestion = () => {};
-
-  const inputProps = {
-    placeholder: "Type a term...",
-    value,
-    onChange: onChange,
-  };
-
   async function handleSearch() {
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
     }, 3000);
-    console.log(value)
-  }
-
-  function Search() {
-    return (
-      <>
-        <Input
-          onClick={handleSearch}
-          type="submit"
-          value="Search"
-          className="w-16 cursor-pointer rounded-lg bg-black text-center text-white hover:shadow-lg active:cursor-wait"
-        />
-        {showAlert && (
-          <Alert className="absolute top-10 w-80 h-20 right-3">
-            <RocketIcon className="h-4 w-4" />
-            <AlertTitle>Heads up!</AlertTitle>
-            <AlertDescription>
-              You can add components to your app using the CLI.
-            </AlertDescription>
-          </Alert>
-        )}
-      </>
-    );
+    console.log(value);
+    // router.push("/characters?",router.query)
   }
 
   return (
@@ -132,11 +97,17 @@ export default function Home() {
           <div className="mt-16 flex w-[60%] flex-col items-center space-y-4">
             <section className="flex flex-row space-x-2">
               <Input
-                onChange={(event) => setValue(event.target.value)}
+                onChange={(event) => {
+                  router.replace({
+                    query: { ...router.query, misiks_wish: event.target.value },
+                  });
+                  setValue(event.target.value)
+
+                }}
                 className="w-60 bg-white p-2"
                 placeholder="location"
               />
-              <Search />
+              <Search handleSearch={handleSearch} showAlert={showAlert} value={value} />
             </section>
             <section>
               <h1 className="font-primary text-xl font-bold tracking-wide text-gray-600">
@@ -171,7 +142,6 @@ export default function Home() {
             height={0}
             src="/forpicklerick.webp"
           />
-          {/* <Search title="search for location" /> */}
         </div>
 
         <h1 className="font-primary text-xl font-bold tracking-wider underline">
