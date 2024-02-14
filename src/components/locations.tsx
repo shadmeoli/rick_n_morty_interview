@@ -1,8 +1,15 @@
 import React from "react";
-import { Location } from "@/interfaces/APISchemas";
+import { Location } from "@/interfaces/HomeT";
 
 import Link from "next/link";
 import Image from "next/image";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 interface Props {
   locations: Location[];
@@ -14,7 +21,7 @@ export default function Locations({ locations }: Props) {
   }
 
   return (
-    <div className="font-primary flex flex-wrap items-center justify-center gap-4">
+    <div className="flex flex-wrap items-center justify-center gap-4 font-primary">
       {locations.map((location: Location, index: number) => {
         console.log(location.url);
 

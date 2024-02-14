@@ -17,6 +17,16 @@ import Locations from "@/components/locations";
 import { SkeletonLocation } from "@/components/ui/Skeleton";
 import { Character, Episode, Location } from "@/interfaces/HomeT";
 import { FilterOption } from "@/enums/HomeEnums";
+import { CalendarIcon } from "@radix-ui/react-icons";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+
 
 const BASE_URL = "https://rickandmortyapi.com/api";
 
@@ -81,7 +91,7 @@ export default function Home() {
                   router.replace({
                     query: { ...router.query, misiks_wish: event.target.value },
                   });
-                  setValue(event.target.value)
+                  setValue(event.target.value);
                 }}
                 className="h-12 w-60 bg-white p-2"
                 placeholder="location"
@@ -124,11 +134,12 @@ export default function Home() {
             <ExclamationTriangleIcon className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>
-              There was something wrong with your search value. Please reload the page
+              There was something wrong with your search value. Please reload
+              the page
             </AlertDescription>
           </Alert>
         ) : (
-          <Locations locations={locations} />
+              <Locations locations={locations} />
         )}
       </main>
     </>
