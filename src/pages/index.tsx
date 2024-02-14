@@ -53,9 +53,9 @@ export default function Home() {
     FilterOption.location,
   );
 
-  const handleRadioChange = (value) => {
-    setSelectedOption(value);
-  };
+  // const handleRadioChange = (value) => {
+  //   setSelectedOption(value);
+  // };
 
   useEffect(() => {
     async function getLocations() {
