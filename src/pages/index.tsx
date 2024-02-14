@@ -1,85 +1,55 @@
-import React, {
-  useState,
-  useEffect,
-  ChangeEvent,
-  ChangeEventHandler,
-} from "react";
+import React, { useState, useEffect } from "react";
 import Head from "next/head";
-import Image from "next/image";
 import axios from "axios";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Location } from "@/interfaces/APISchemas";
-import { Button } from "@/components/ui/button";
-import Locations from "@/components/locations";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { SearchModalProps } from "@/interfaces/HomeT";
-import { SkeletonLocation } from "@/components/ui/Skeleton";
-import { ToastAction } from "@/components/ui/toast";
-import { useToast } from "@/components/ui/use-toast";
-import { RocketIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
-import { api } from "@/utils/api";
+import { Input } from "@/components/ui/input";
 import Search from "@/components/Search";
+import Locations from "@/components/locations";
+import { SkeletonLocation } from "@/components/ui/Skeleton";
+import { Character, Episode, Location } from "@/interfaces/HomeT";
+import { FilterOption } from "@/enums/HomeEnums";
 
-enum FilterOption {
-  location = "location",
-  Character = "character",
-  episodes = "episodes",
-}
+const BASE_URL = "https://rickandmortyapi.com/api";
 
 export default function Home() {
-  const router = useRouter()
-  const LOCATIONS_URL = "https://rickandmortyapi.com/api/location";
+  const router = useRouter();
   const [locations, setLocations] = useState<Location[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-  const [value, setValue] = React.useState<string>("");
-  const [locationList, setLocationList] = useState<Location[]>([]);
+  const [value, setValue] = useState<string>("");
   const [showAlert, setShowAlert] = useState<boolean>(false);
-  const [filterOptions, setFilterOptions] = useState<FilterOption>(
-    FilterOption.location,
-  );
-
-  // const handleRadioChange = (value) => {
-  //   setSelectedOption(value);
-  // };
 
   useEffect(() => {
-    async function getLocations() {
-      setLoading(true);
+    setLoading(true);
+    const fetchData = async () => {
       try {
-        const response = await axios.get(LOCATIONS_URL);
+        let response;
+        if (value) {
+          response = await axios.get(`${BASE_URL}/location?name=${value}`);
+        } else {
+          response = await axios.get(`${BASE_URL}/location`);
+        }
         setLocations(response.data.results);
       } catch (error) {
         setError("Failed to fetch locations");
         console.error("Error fetching locations:", error);
       } finally {
         setLoading(false);
+        setShowAlert(false);
       }
-    }
-    getLocations();
-  }, []);
+    };
+    fetchData();
+  }, [value]);
 
-  async function handleSearch() {
+  const handleSearch = async () => {
     setShowAlert(true);
-    setTimeout(() => {
-      setShowAlert(false);
-    }, 3000);
+    const response = await axios.get(`${BASE_URL}/location?query=${value}`);
+    setLocations(response.data.results);
+    setShowAlert(false);
     console.log(value);
-  }
+  };
 
   return (
     <>
@@ -100,39 +70,20 @@ export default function Home() {
           <div className="mt-16 flex w-[60%] flex-col items-center space-y-4">
             <section className="flex flex-row space-x-2">
               <Input
-                onChange={(event) => {
-                  router.replace({
-                    query: { ...router.query, misiks_wish: event.target.value },
-                  });
-                  setValue(event.target.value)
-
-                }}
-                className="w-60 bg-white p-2 h-12"
+                onChange={(event) => setValue(event.target.value)}
+                className="h-12 w-60 bg-white p-2"
                 placeholder="location"
               />
-              <Search handleSearch={handleSearch} showAlert={showAlert} value={value} />
+              <Search
+                handleSearch={handleSearch}
+                showAlert={showAlert}
+                value={value}
+              />
             </section>
             <section>
               <h1 className="font-primary text-xl font-bold tracking-wide text-gray-600">
-                Filter by
+                Filter Options
               </h1>
-              <RadioGroup
-                className="flex w-80 flex-row space-x-2 rounded-lg bg-gray-100 p-4"
-                defaultValue={FilterOption.location}
-              >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value={FilterOption.location} id="r1" />
-                  <Label htmlFor="r1">Location Name</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value={FilterOption.Character} id="r2" />
-                  <Label htmlFor="r2">Character Name</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value={FilterOption.episodes} id="r3" />
-                  <Label htmlFor="r3">Episode Name</Label>
-                </div>
-              </RadioGroup>
             </section>
           </div>
         </div>
@@ -153,7 +104,7 @@ export default function Home() {
         {loading ? (
           <div className="flex w-full flex-wrap items-center justify-center gap-2">
             {Array.from({ length: 4 }, (_, index) => (
-              <SkeletonLocation />
+              <SkeletonLocation key={index} />
             ))}
           </div>
         ) : error ? (
