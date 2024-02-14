@@ -18,6 +18,7 @@ import { Location } from "@/interfaces/APISchemas";
 import { Button } from "@/components/ui/button";
 import Locations from "@/components/locations";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { SearchModalProps } from "@/interfaces/HomeT";
 import { api } from "@/utils/api";
 
 export default function Home() {
@@ -42,7 +43,7 @@ export default function Home() {
     getLocations();
   }, []);
 
-  const Search = ({title}) => {
+  const Search = ({ title }: SearchModalProps) => {
     return (
       <Dialog>
         <DialogTrigger className="absolute mt-[32%] h-12 rounded-xl border-b-black border-r-black bg-black/10 p-2 text-center text-white/20 backdrop-blur-xl transition duration-300 ease-in-out hover:border-b-4 hover:border-r-4 group-hover:bg-gray-800 group-hover:text-white">
@@ -57,7 +58,7 @@ export default function Home() {
                 <Button>search</Button>
               </section>
               <section>
-                <h1 className="font-primary text-xl tracking-wide font-bold">
+                <h1 className="font-primary text-xl font-bold tracking-wide">
                   Filter by
                 </h1>
                 <RadioGroup
@@ -83,7 +84,7 @@ export default function Home() {
         </DialogContent>
       </Dialog>
     );
-  }
+  };
 
   return (
     <>
@@ -93,21 +94,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="max-h-auto flex h-auto min-h-screen flex-col items-center space-y-10 bg-gray-200 px-10 pb-10 pt-10">
-        {/* <section className="flex flex-row items-center space-x-2">
-          <Input className="font-primary w-60 bg-white p-2" />
-          <Button className="font-primary tracking-wide" variant="outline">
-            search
-          </Button>
-        </section> */}
-
-        <div className="flex h-[1080px] w-full items-center justify-center">
+        <div className="flex h-[500px] w-full items-center justify-center">
           <section className="flex flex-col items-center space-y-2">
             <h1 className="font-primary text-6xl font-extrabold">
               Rick And Morty API
             </h1>
             <p>A Simple site to show case my full stack skills</p>
           </section>
-          <p className="absolute bottom-10 text-gray-400">Just scroll</p>
         </div>
 
         <div className="group relative flex items-center justify-center">
