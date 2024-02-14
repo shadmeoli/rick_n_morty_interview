@@ -13,20 +13,18 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
-  
+  images: {
+    formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "rickandmortyapi.com",
+        port: "",
+        pathname: "**/api/location/**",
+      },
+    ],
+  },
 };
-// module.exports = {
-//   images: {
-//     formats: ["image/avif", "image/webp"],
-//     remotePatters: [
-//       {
-//         protocol: "https",
-//         hostname: "rickandmortyapi.com",
-//         port: "",
-//       },
-//     ],
-//   },
-// };
 
 
 export default config;
