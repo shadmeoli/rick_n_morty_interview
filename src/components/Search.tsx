@@ -14,7 +14,7 @@ export default function Search({ handleSearch, showAlert, value }: SearchProps) 
         onClick={handleSearch}
         type="submit"
         value="Search"
-        className="w-16 cursor-pointer rounded-lg bg-black text-center text-white hover:shadow-lg active:cursor-wait"
+        className="w-16 cursor-pointer rounded-lg bg-black text-center text-white hover:shadow-lg active:cursor-wait h-12"
       />
       {showAlert && (
         <Alert className="font-primary absolute right-3 top-10 flex h-20 w-80 flex-col items-start justify-center bg-white text-black backdrop-blur">
@@ -23,7 +23,7 @@ export default function Search({ handleSearch, showAlert, value }: SearchProps) 
           <AlertDescription className='space-x-2'>
             Let's see if we can find
             {value.length ? (
-              <span className="h-10 rounded-xl bg-blue-200 p-1 text-xs text-blue-800">
+              <span className="h-10 w-10 rounded-xl bg-blue-200 p-1 text-xs text-blue-800">
                 {value}
               </span>
             ) : (

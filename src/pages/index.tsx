@@ -53,6 +53,10 @@ export default function Home() {
     FilterOption.location,
   );
 
+  const handleRadioChange = (value) => {
+    setSelectedOption(value);
+  };
+
   useEffect(() => {
     async function getLocations() {
       setLoading(true);
@@ -75,7 +79,6 @@ export default function Home() {
       setShowAlert(false);
     }, 3000);
     console.log(value);
-    // router.push("/characters?",router.query)
   }
 
   return (
@@ -104,7 +107,7 @@ export default function Home() {
                   setValue(event.target.value)
 
                 }}
-                className="w-60 bg-white p-2"
+                className="w-60 bg-white p-2 h-12"
                 placeholder="location"
               />
               <Search handleSearch={handleSearch} showAlert={showAlert} value={value} />
