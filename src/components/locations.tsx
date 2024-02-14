@@ -14,7 +14,7 @@ export default function Locations({ locations }: Props) {
   }
 
   return (
-    <div className="font-primary flex flex-wrap gap-4">
+    <div className="font-primary flex flex-wrap items-center justify-center gap-4">
       {locations.map((location: Location, index: number) => {
         console.log(location.url);
 
