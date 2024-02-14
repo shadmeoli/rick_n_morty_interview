@@ -4,6 +4,13 @@ import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/router";
 
+import { ExclamationTriangleIcon } from "@radix-ui/react-icons"
+ 
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
 import { Input } from "@/components/ui/input";
 import Search from "@/components/Search";
 import Locations from "@/components/locations";
@@ -70,7 +77,12 @@ export default function Home() {
           <div className="mt-16 flex w-[60%] flex-col items-center space-y-4">
             <section className="flex flex-row space-x-2">
               <Input
-                onChange={(event) => setValue(event.target.value)}
+                onChange={(event) => {
+                  router.replace({
+                    query: { ...router.query, misiks_wish: event.target.value },
+                  });
+                  setValue(event.target.value)
+                }}
                 className="h-12 w-60 bg-white p-2"
                 placeholder="location"
               />
@@ -108,7 +120,13 @@ export default function Home() {
             ))}
           </div>
         ) : error ? (
-          <p>Error: {error}</p>
+          <Alert variant="destructive">
+            <ExclamationTriangleIcon className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              There was something wrong with your search value. Please reload the page
+            </AlertDescription>
+          </Alert>
         ) : (
           <Locations locations={locations} />
         )}
