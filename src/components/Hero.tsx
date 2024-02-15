@@ -12,15 +12,18 @@ export default function Hero({setValue, handleSearch, showAlert, value}: HeroPro
 
   return (
     <>
-      <div className="flex h-[400px] w-full flex-col items-center justify-center">
-        <section className="flex flex-col items-center -space-y-6">
-          <Image
-            className="filter-monochrome rounded-xl"
+    <div className="w-full h-12 sticky top-2 z-10 backdrop-blur">
+      <Image
+            className="filter-monochrome rounded-xl z-10"
             alt="I'm Mr.Misicks"
-            width={400}
+            width={100}
             height={0}
             src="/Rick-and-Morty.png"
           />
+    </div>
+      <div className="flex h-[400px] w-full flex-col items-center justify-center">
+        <section className="flex flex-col items-center space-y-2"> 
+          <h1 className="text-6xl font-bold text-black">Rick And Morty</h1>
           <p>A Simple site to show case my full stack skills</p>
         </section>
 

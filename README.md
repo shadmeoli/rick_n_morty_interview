@@ -64,9 +64,3 @@ Why sqlite and prisma - for saving notes I believe SQLite is the best option tha
 
 
 #### Architecture & design.
-
-
-
-
-
-

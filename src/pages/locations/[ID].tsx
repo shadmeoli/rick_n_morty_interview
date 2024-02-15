@@ -91,9 +91,9 @@ export default function CharcterByID() {
         character_name: characterName,
       });
     } catch (err) {
-      console.log(err)
+      console.log(err);
     } finally {
-      setShowAlert(true)
+      setShowAlert(true);
       setTimeout(() => {
         setShowAlert(false);
       }, 3000);
@@ -103,15 +103,20 @@ export default function CharcterByID() {
 
   return (
     <>
-      <section className="flex flex-col items-center -space-y-6">
+      <div className="sticky top-2 z-10 h-12 w-full backdrop-blur">
         <Image
-          className="filter-monochrome rounded-xl"
+          className="filter-monochrome z-10 rounded-xl"
           alt="I'm Mr.Misicks"
-          width={400}
+          width={100}
           height={0}
           src="/Rick-and-Morty.png"
         />
-        <p>A Simple site to show case my full stack skills</p>
+      </div>
+    <section className="mt-40 flex flex-col items-center -space-y-6">
+        <section className="flex flex-col items-center space-y-2"> 
+          <h1 className="text-6xl font-bold text-black">Rick And Morty</h1>
+          <p>A Simple site to show case my full stack skills</p>
+        </section>
       </section>
 
       <div className="mt-16 flex w-[60%] flex-col items-start space-y-1 px-10">
