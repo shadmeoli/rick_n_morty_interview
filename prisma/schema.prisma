@@ -10,7 +10,7 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-model CharacterNotes {
+model Notes {
     id Int @id @default(autoincrement())
     character_name String
     note String

@@ -6,6 +6,7 @@ import { BASE_URL, GRAPH_URL } from "@/constants/HomeC";
 import { Character } from "@/interfaces/HomeT";
 import { Input } from "@/components/ui/input";
 import { SkeletonLocation } from "@/components/ui/Skeleton";
+import { useRouter } from "next/router";
 import {
   Pagination,
   PaginationContent,
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui/pagination";
 
 export default function CharcterByID() {
+  const router = useRouter()
   const [loading, setLoading] = useState<boolean>(false);
   const [location_ID, setLocationID] = useState<number>();
   const [location_name, setLocationName] = useState<string>();
@@ -65,12 +67,32 @@ export default function CharcterByID() {
 
   return (
     <>
-      {/* <Input
-        className="w-60 border-black"
-        onChange={(event: Event) => setValue(event?.target?.value as string)}
-        placeholder="Character Name"
-      /> */}
-      {/* Add loading indicator */}
+      <section className="flex flex-col items-center -space-y-6">
+        <Image
+          className="filter-monochrome rounded-xl"
+          alt="I'm Mr.Misicks"
+          width={400}
+          height={0}
+          src="/Rick-and-Morty.png"
+        />
+        <p>A Simple site to show case my full stack skills</p>
+      </section>
+
+      <div className="mt-16 flex w-[60%] flex-col items-start px-10 space-y-1">
+          <h1 className="font-primary font-semibold">Character Name</h1>
+        <section className="flex flex-row space-x-2">
+          <Input
+            onChange={(event) => {
+              router.replace({
+                query: { ...router.query, misiks_wish: event.target.value },
+              });
+              setValue(event.target.value);
+            }}
+            className="h-12 w-60 bg-white p-2"
+            placeholder="character"
+          />
+        </section>
+      </div>
       {loading && (
         <div className="flex w-full flex-wrap items-center justify-center gap-2">
           {Array.from({ length: 4 }, (_, index) => (
@@ -93,10 +115,10 @@ export default function CharcterByID() {
                 src={character.image}
               />
               <section className="flex flex-col items-start space-y-2">
-                <h1 className="overflow-clip truncate font-primary font-bold">
+                <h1 className="w-36 text-ellipsis overflow-clip truncate font-primary font-bold">
                   {character.name}
                 </h1>
-                <p className="min-w-12 rounded-full bg-blue-200 p-1 text-center text-xs text-blue-800">
+                <p className="min-w-12  rounded-full bg-blue-200 p-1 text-center text-xs text-blue-800">
                   {character.status}
                 </p>
                 <p className="animate-pulse text-xs font-light">
@@ -108,37 +130,56 @@ export default function CharcterByID() {
           <Pagination>
             <PaginationContent>
               <PaginationItem>
-                <PaginationPrevious className="cursor-pointer" onClick={() => {
-                  if (page === 0) {
-                    return
-                  } else {
-                    setPage(page - 1)
-                  }
-                }} />
+                <PaginationPrevious
+                  className="cursor-pointer"
+                  onClick={() => {
+                    if (page === 0) {
+                      return;
+                    } else {
+                      setPage(page - 1);
+                    }
+                  }}
+                />
               </PaginationItem>
-              {
-                page >= 4 && (
-              <PaginationItem>
-                <PaginationLink className="bg-pink-200 text-pink-800 cursor-pointer" onClick={() => setPage(1)} >1</PaginationLink>
-              </PaginationItem>
-                )
-              }
+              {page >= 4 && (
+                <PaginationItem>
+                  <PaginationLink
+                    className="cursor-pointer bg-pink-200 text-pink-800"
+                    onClick={() => setPage(1)}
+                  >
+                    1
+                  </PaginationLink>
+                </PaginationItem>
+              )}
               {page > 1 && (
-              <PaginationItem>
-                <PaginationLink className="cursor-pointer" onClick={() => setPage(page-1)} >{page-1}</PaginationLink>
-              </PaginationItem>
+                <PaginationItem>
+                  <PaginationLink
+                    className="cursor-pointer"
+                    onClick={() => setPage(page - 1)}
+                  >
+                    {page - 1}
+                  </PaginationLink>
+                </PaginationItem>
               )}
               <PaginationItem>
                 <PaginationLink isActive>{page}</PaginationLink>
               </PaginationItem>
               <PaginationItem>
-                <PaginationLink className="cursor-pointer" onClick={() => setPage(page+1)}>{page+1}</PaginationLink>
+                <PaginationLink
+                  className="cursor-pointer"
+                  onClick={() => setPage(page + 1)}
+                >
+                  {page + 1}
+                </PaginationLink>
               </PaginationItem>
               <PaginationItem>
                 <PaginationEllipsis />
               </PaginationItem>
               <PaginationItem>
-                <PaginationNext className="cursor-pointer" onClick={() => setPage(page+1)} />
+                <PaginationNext
+                  className="cursor-pointer"
+                  onClick={() => setPage(page + 1)}
+                />
               </PaginationItem>
             </PaginationContent>
           </Pagination>
