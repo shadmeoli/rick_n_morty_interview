@@ -40,3 +40,21 @@ export interface Episode {
   url: string;
   created: string;
 }
+
+export interface Location {
+  id: number;
+  name: string;
+  type: string;
+  dimension: string;
+  residents: string[];
+  url: string;
+  created: string;
+}
+
+
+export interface HeroProps {
+  setValue: (arg: string) => void;
+  handleSearch: () => void;
+  showAlert: boolean;
+  value: string;
+}

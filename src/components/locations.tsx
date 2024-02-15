@@ -27,7 +27,7 @@ export default function Locations({ locations }: Props) {
 
         return (
           <Link
-            href={`characters/${location.id}`}
+            href={`locations/${location.id}`}
             key={location.id}
             className="h-40 w-60 rounded-md bg-gray-100 p-4 hover:shadow-lg"
           >

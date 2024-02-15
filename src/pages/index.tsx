@@ -15,9 +15,7 @@ import { Input } from "@/components/ui/input";
 import Search from "@/components/Search";
 import Locations from "@/components/locations";
 import { SkeletonLocation } from "@/components/ui/Skeleton";
-import { Character, Episode, Location } from "@/interfaces/HomeT";
-import { FilterOption } from "@/enums/HomeEnums";
-import { CalendarIcon } from "@radix-ui/react-icons";
+import { Location } from "@/interfaces/HomeT";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -26,9 +24,10 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import {BASE_URL}  from "@/constants/HomeC"
+import Hero from "@/components/Hero";
 
 
-const BASE_URL = "https://rickandmortyapi.com/api";
 
 export default function Home() {
   const router = useRouter();
@@ -76,39 +75,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="max-h-auto flex h-auto min-h-screen flex-col items-center space-y-10 bg-gray-200 px-10 pb-10 pt-10">
-        <div className="flex h-[400px] w-full flex-col items-center justify-center">
-          <section className="flex flex-col items-center space-y-2">
-            <h1 className="font-primary text-6xl font-extrabold">
-              Rick And Morty API
-            </h1>
-            <p>A Simple site to show case my full stack skills</p>
-          </section>
-
-          <div className="mt-16 flex w-[60%] flex-col items-center space-y-4">
-            <section className="flex flex-row space-x-2">
-              <Input
-                onChange={(event) => {
-                  router.replace({
-                    query: { ...router.query, misiks_wish: event.target.value },
-                  });
-                  setValue(event.target.value);
-                }}
-                className="h-12 w-60 bg-white p-2"
-                placeholder="location"
-              />
-              <Search
-                handleSearch={handleSearch}
-                showAlert={showAlert}
-                value={value}
-              />
-            </section>
-            <section>
-              <h1 className="font-primary text-xl font-bold tracking-wide text-gray-600">
-                Filter Options
-              </h1>
-            </section>
-          </div>
-        </div>
+        <Hero setValue={setValue} handleSearch={handleSearch} showAlert={showAlert} value={value} /> 
 
         <div className="group relative flex items-center justify-center">
           <Image
@@ -139,9 +106,19 @@ export default function Home() {
             </AlertDescription>
           </Alert>
         ) : (
-              <Locations locations={locations} />
+          <Locations locations={locations} />
         )}
       </main>
     </>
   );
 }
+
+
+
+/**
+ * 
+ * Work on :
+ * - pagination
+ * - detailed view
+ * 
+ */
