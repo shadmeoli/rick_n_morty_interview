@@ -5,8 +5,6 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 import { SearchProps } from '@/interfaces/HomeT';
 
-
-
 export default function Search({ handleSearch, showAlert, value }: SearchProps) {
   return (
     <>

@@ -27,7 +27,11 @@ export default function Locations({ locations }: Props) {
 
         return (
           <Link
-            href={`locations/${location.id}`}
+            onClick={() => {
+              sessionStorage.setItem("location_ID", `${location.id}`);
+              sessionStorage.setItem("origin", `${location.name}`);
+            }}
+            href={`locations/ID=${location.id}origin=${location.name}`}
             key={location.id}
             className="h-40 w-60 rounded-md bg-gray-100 p-4 hover:shadow-lg"
           >

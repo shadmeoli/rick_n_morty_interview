@@ -20,7 +20,7 @@ const config = {
         protocol: "https",
         hostname: "rickandmortyapi.com",
         port: "",
-        pathname: "**/api/location/**",
+        pathname: "**/api/**",
       },
     ],
   },
