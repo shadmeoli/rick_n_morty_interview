@@ -228,7 +228,7 @@ export default function CharcterByID() {
             <DialogHeader>
               <DialogTitle>Setup Note</DialogTitle>
               <DialogDescription>
-                Make changes to your profile here. Click save when you're done.
+                Make a note about your selected character.
               </DialogDescription>
             </DialogHeader>
             <div className="grid gap-4 py-4">
