@@ -12,7 +12,7 @@ export default function Hero({setValue, handleSearch, showAlert, value}: HeroPro
 
   return (
     <>
-    <div className="w-full h-12 sticky top-2 z-10 backdrop-blur">
+    <div className="w-full h-12 sticky top-2 backdrop-blur">
       <Image
             className="filter-monochrome rounded-xl z-10"
             alt="I'm Mr.Misicks"

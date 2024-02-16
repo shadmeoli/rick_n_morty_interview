@@ -27,8 +27,6 @@ import {
 import {BASE_URL}  from "@/constants/HomeC"
 import Hero from "@/components/Hero";
 
-
-
 export default function Home() {
   const router = useRouter();
   const [locations, setLocations] = useState<Location[]>([]);
@@ -97,7 +95,7 @@ export default function Home() {
             ))}
           </div>
         ) : error ? (
-          <Alert className="z-10" variant="destructive">
+          <Alert className="absolute z-10" variant="destructive">
             <ExclamationTriangleIcon className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>
