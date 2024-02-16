@@ -97,7 +97,7 @@ export default function Home() {
             ))}
           </div>
         ) : error ? (
-          <Alert variant="destructive">
+          <Alert className="z-10" variant="destructive">
             <ExclamationTriangleIcon className="h-4 w-4" />
             <AlertTitle>Error</AlertTitle>
             <AlertDescription>
