@@ -64,3 +64,10 @@ Why sqlite and prisma - for saving notes I believe SQLite is the best option tha
 
 
 #### Architecture & design.
+
+![Characters](https://github.com/shadmeoli/rick_n_morty_interview/assets/85517013/4c78da95-ecac-459b-b451-4be5be819cf1)
+
+![Home](https://github.com/shadmeoli/rick_n_morty_interview/assets/85517013/cb8765ef-2252-44fd-b0fc-6fa1818d4426)
+
+![Note Creaton](https://github.com/shadmeoli/rick_n_morty_interview/assets/85517013/1bab910f-f723-481e-8277-8638a4b72f51)
+
