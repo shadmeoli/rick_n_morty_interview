@@ -87,8 +87,8 @@ export default function CharcterByID() {
   function saveNote() {
     try {
       db.mutate({
-        note: note,
-        character_name: characterName,
+        note: note as string,
+        character_name: characterName as string,
       });
     } catch (err) {
       console.log(err);
